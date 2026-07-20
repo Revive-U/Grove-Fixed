@@ -42,13 +42,9 @@ app.use(express.urlencoded({
 	extended: true
 }));
 
-// Create subdomains
-logger.info('[WUP] Creating \'eshop\' subdomain');
-app.use(subdomain('eshop', ROUTERS.WUP));
-
-// Setup routes
+// (Fixed) Setup routes directly because no subdomain split needed
 logger.info('[WUP] Applying imported routes');
-ROUTERS.WUP.use('/', ROUTES.WUP.main);
+app.use('/', ROUTES.WUP.main);
 
 // 404 handler
 logger.info('Creating 404 status handler');
